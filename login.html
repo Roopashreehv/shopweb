@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: rgb(210, 228, 243);
+        }
+
+        .container {
+            width: 330px;
+            padding: 2rem, 2rem;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #07001f;
+            margin-bottom: 1.2rem;
+        }
+
+        form input {
+            width: 92%;
+            outline: none;
+            border: 1px solid #fff;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            background: #e4e4e4;
+        }
+
+        button {
+            font-size: 1rem;
+            margin-top: 1.2rem;
+            padding: 10px 0;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            width: 90%;
+            color: #fff;
+            cursor: pointer;
+            background: rgb(17, 107, 143);
+        }
+
+        button:hover {
+            background: rgba(17, 107, 143, 0.8);
+        }
+
+        input:focus {
+            border: 1px solid rgb(192, 192, 192);
+        }
+
+        .member {
+            font-size: 0.8rem;
+            margin-top: 1.4rem;
+            color: #636363;
+        }
+
+        .member a {
+            color: rgb(17, 107, 143);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Log In</h1>
+        <form onsubmit="login(event)">
+            <input type="email" placeholder="email" id="email">
+            <br>
+            <input type="password" placeholder="Password" id="password">
+            <br>
+            <button>Login</button>
+        </form>
+        <div class="member">
+            If you dont have a member <a href="signup.html">SignUp</a>
+        </div>
+
+    </div>
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_RDbaXHMyKIR1bfPKHi39zHsZRGQ2aJk",
+            authDomain: "auth-27355.firebaseapp.com",
+            projectId: "auth-27355",
+            storageBucket: "auth-27355.appspot.com",
+            messagingSenderId: "553384774135",
+            appId: "1:553384774135:web:fd5b8e334872d7439506f2",
+            measurementId: "G-7LMYX1HX76"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const Auth = getAuth()
+
+
+
+        var email = document.getElementById("email")
+        var password = document.getElementById("password")
+
+        window.login = function (e) {
+            e.preventDefault()
+            let obj = {
+                email: email.value,
+                password: password.value
+            }
+            signInWithEmailAndPassword(Auth, obj.email, obj.password)
+                .then(() => {
+                    alert("Logged In....!")
+                    window.location.replace("index.html")
+                })
+                .catch((err) => {
+                    alert("erorr." + err)
+                })
+        }
+    </script>
+</body>
+
+</html>
